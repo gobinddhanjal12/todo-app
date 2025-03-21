@@ -2,16 +2,24 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
-pool.connect((err, client, release) => {
-  if (err) {
-    console.error('Error connecting to the database:', err.stack);
-  } else {
+// Test the connection
+const testConnection = async () => {
+  try {
+    const client = await pool.connect();
     console.log('Successfully connected to database');
-    release();
+    client.release();
+    return true;
+  } catch (err) {
+    console.error('Error connecting to the database:', err.stack);
+    return false;
   }
-});
+};
+
+// Test connection on startup
+testConnection();
 
 module.exports = {
   query: (text, params) => {
@@ -21,5 +29,6 @@ module.exports = {
         console.error('Database query error:', err);
         throw err;
       });
-  }
+  },
+  testConnection
 }; 
