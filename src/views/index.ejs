@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Todo List</h4>
+            </div>
+            <div class="card-body">
+                <form id="addTodoForm" class="mb-4">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="todoTitle" placeholder="Enter todo title" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="todoDescription" placeholder="Enter description (optional)"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Todo</button>
+                </form>
+
+                <div id="todoList">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="todoTemplate">
+    <div class="todo-item card mb-2">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1 todo-title"></h5>
+                    <p class="todo-description text-muted small mb-0"></p>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-primary edit-todo">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-todo">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template> 
